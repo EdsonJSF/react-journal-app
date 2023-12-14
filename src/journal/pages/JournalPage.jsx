@@ -1,10 +1,16 @@
 import { Typography } from "@mui/material";
 
+import { JournalLayout } from "../layout/JournalLayout";
+
 export const JournalPage = () => {
   return (
-    <>
-      <Typography variant="h1">JournalPage</Typography>
-      <hr />
-    </>
+    <JournalLayout>
+      <Typography>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, deserunt?
+        Ipsa veritatis nobis totam iusto eos eveniet. Quisquam incidunt
+        consectetur ex repellat possimus. Pariatur doloribus excepturi
+        consequatur ipsam rerum mollitia.
+      </Typography>
+    </JournalLayout>
   );
 };
