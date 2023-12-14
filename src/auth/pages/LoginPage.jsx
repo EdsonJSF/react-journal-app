@@ -1,6 +1,7 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, Typography, TextField, Link } from "@mui/material";
 import { Google } from "@mui/icons-material";
+
 import { AuthLayout } from "../layout/AuthLayout";
 
 export const LoginPage = () => {
