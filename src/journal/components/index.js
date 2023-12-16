@@ -1,1 +1,2 @@
-export { JournalNavBar } from "./JournalNavBar";
+export * from "./JournalNavBar";
+export * from "./JournalSideBar";
