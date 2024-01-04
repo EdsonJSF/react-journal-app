@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Grid, Typography, TextField, Link } from "@mui/material";
 
@@ -17,6 +18,8 @@ const registerFormValidations = {
 };
 
 export const RegisterPage = () => {
+  const [formSubmited, setFormSubmited] = useState(false);
+
   const {
     displayName,
     email,
@@ -31,6 +34,7 @@ export const RegisterPage = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setFormSubmited(true);
     console.log(formState);
   };
 
@@ -47,7 +51,7 @@ export const RegisterPage = () => {
               name="displayName"
               value={displayName}
               onChange={handleInputChange}
-              error={displayNameValid}
+              error={displayNameValid && formSubmited}
             />
           </Grid>
 
@@ -60,7 +64,7 @@ export const RegisterPage = () => {
               name="email"
               value={email}
               onChange={handleInputChange}
-              error={emailValid}
+              error={emailValid && formSubmited}
             />
           </Grid>
 
@@ -73,7 +77,7 @@ export const RegisterPage = () => {
               name="password"
               value={password}
               onChange={handleInputChange}
-              error={passwordValid}
+              error={passwordValid && formSubmited}
             />
           </Grid>
 
