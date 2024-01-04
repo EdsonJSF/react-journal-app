@@ -10,9 +10,24 @@ const registerForm = {
   password: "123456",
 };
 
+const registerFormValidations = {
+  displayName: [(val) => val.length >= 1, "Invalid name"],
+  email: [(val) => val.includes("@"), "Invalid email"],
+  password: [(val) => val.length >= 6, "Password length most be 6 or greater"],
+};
+
 export const RegisterPage = () => {
-  const { displayName, email, password, formState, handleInputChange } =
-    useForm(registerForm);
+  const {
+    displayName,
+    email,
+    password,
+    displayNameValid,
+    emailValid,
+    passwordValid,
+    isFormValid,
+    formState,
+    handleInputChange,
+  } = useForm(registerForm, registerFormValidations);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +47,7 @@ export const RegisterPage = () => {
               name="displayName"
               value={displayName}
               onChange={handleInputChange}
+              error={displayNameValid}
             />
           </Grid>
 
@@ -44,6 +60,7 @@ export const RegisterPage = () => {
               name="email"
               value={email}
               onChange={handleInputChange}
+              error={emailValid}
             />
           </Grid>
 
@@ -56,6 +73,7 @@ export const RegisterPage = () => {
               name="password"
               value={password}
               onChange={handleInputChange}
+              error={passwordValid}
             />
           </Grid>
 
