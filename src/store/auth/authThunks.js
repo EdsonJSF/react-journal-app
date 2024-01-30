@@ -35,7 +35,5 @@ export const startCreatingUserWithEmailPassword = ({
       email,
       password,
     });
-
-    console.log("thunk", res);
   };
 };
