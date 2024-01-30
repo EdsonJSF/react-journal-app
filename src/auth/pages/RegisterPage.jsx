@@ -1,11 +1,21 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link as RouterLink } from "react-router-dom";
-import { Button, Grid, Typography, TextField, Link } from "@mui/material";
+import {
+  Alert,
+  Button,
+  Grid,
+  Typography,
+  TextField,
+  Link,
+} from "@mui/material";
 
 import { AuthLayout } from "../layout/AuthLayout";
 import { useForm } from "../../hooks";
-import { startCreatingUserWithEmailPassword } from "../../store/auth";
+import {
+  startCreatingUserWithEmailPassword,
+  status as authStatus,
+} from "../../store/auth";
 
 const registerForm = {
   displayName: "Example Mailinator",
@@ -23,6 +33,12 @@ export const RegisterPage = () => {
   const dispatch = useDispatch();
   const [formSubmited, setFormSubmited] = useState(false);
 
+  const { status, errorMessage } = useSelector((state) => state.authReducer);
+  const isCheckingAuthentication = useMemo(
+    () => status === authStatus[0],
+    [status]
+  );
+
   const {
     displayName,
     email,
@@ -38,7 +54,7 @@ export const RegisterPage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setFormSubmited(true);
-    if (!isFormValid) return;
+    if (!isFormValid || isCheckingAuthentication) return;
     dispatch(startCreatingUserWithEmailPassword(formState));
   };
 
@@ -86,8 +102,17 @@ export const RegisterPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mt: 1, mb: 2 }}>
+            <Grid item display={errorMessage ? "" : "none"}>
+              <Alert severity="error">{errorMessage}</Alert>
+            </Grid>
+
             <Grid item xs={12} sm={6}>
-              <Button type="submit" variant="contained" fullWidth>
+              <Button
+                disabled={isCheckingAuthentication}
+                type="submit"
+                variant="contained"
+                fullWidth
+              >
                 register
               </Button>
             </Grid>
