@@ -102,7 +102,7 @@ export const RegisterPage = () => {
           </Grid>
 
           <Grid container spacing={2} sx={{ mt: 1, mb: 2 }}>
-            <Grid item display={errorMessage ? "" : "none"}>
+            <Grid item display={errorMessage ? "" : "none"} xs={12}>
               <Alert severity="error">{errorMessage}</Alert>
             </Grid>
 
