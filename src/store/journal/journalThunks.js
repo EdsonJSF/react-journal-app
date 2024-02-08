@@ -1,8 +1,12 @@
 import { collection, doc, setDoc } from "firebase/firestore/lite";
 import { firestoreApp } from "../../firebase/config";
 
+import { addNewEmptyNote, savingNewNote, setActiveNote } from "./";
+
 export const startNewNote = () => {
   return async (dispatch, getState) => {
+    dispatch(savingNewNote());
+
     const { uid } = getState().authReducer;
 
     const newNote = {
@@ -12,12 +16,11 @@ export const startNewNote = () => {
     };
 
     const newDoc = doc(collection(firestoreApp, `${uid}/journal/notes`));
-    const resp = await setDoc(newDoc, newNote);
+    await setDoc(newDoc, newNote);
 
-    console.log(newDoc, resp);
+    newNote.id = newDoc.id;
 
-    // TODO: Create dispatch
-    // dispatch (newNote)
-    // dispatch (activeNote)
+    dispatch(addNewEmptyNote(newNote));
+    dispatch(setActiveNote(newNote));
   };
 };
