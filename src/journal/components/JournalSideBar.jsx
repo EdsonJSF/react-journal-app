@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { Box, Divider, Drawer, List, Toolbar, Typography } from "@mui/material";
 import { JournalSideBarListItem } from "./";
@@ -39,8 +38,4 @@ export const JournalSideBar = ({ drawerWidth = 240 }) => {
       </Drawer>
     </Box>
   );
-};
-
-JournalSideBar.propTypes = {
-  drawerWidth: PropTypes.number,
 };

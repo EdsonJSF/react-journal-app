@@ -1,6 +1,5 @@
 import { useMemo } from "react";
-import PropTypes from "prop-types";
-
+import { useDispatch } from "react-redux";
 import {
   Grid,
   ListItem,
@@ -9,15 +8,22 @@ import {
   ListItemText,
 } from "@mui/material";
 import { TurnedInNot } from "@mui/icons-material";
+import { setActiveNote } from "../../store/journal";
 
-export const JournalSideBarListItem = ({ title = "", body }) => {
+export const JournalSideBarListItem = ({ id, title, body, date }) => {
   const newTitle = useMemo(() => {
     return title.length > 15 ? title.substring(0, 15) + "..." : title;
   }, [title]);
 
+  const dispatch = useDispatch();
+
+  const handleActiveNote = () => {
+    dispatch(setActiveNote({ id, title, body, date }));
+  };
+
   return (
     <ListItem>
-      <ListItemButton>
+      <ListItemButton onClick={handleActiveNote}>
         <ListItemIcon>
           <TurnedInNot />
         </ListItemIcon>
@@ -29,9 +35,4 @@ export const JournalSideBarListItem = ({ title = "", body }) => {
       </ListItemButton>
     </ListItem>
   );
-};
-
-JournalSideBarListItem.propTypes = {
-  title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
 };
