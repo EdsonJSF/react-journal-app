@@ -20,15 +20,17 @@ import {
   startLoginWithEmailPassword,
 } from "../../store/auth";
 
+const formLogin = {
+  email: "",
+  password: "",
+};
+
 export const LoginPage = () => {
   const { status, errorMessage } = useSelector((state) => state.authReducer);
 
   const dispatch = useDispatch();
 
-  const { email, password, handleInputChange, formState } = useForm({
-    email: "example@mailinator.com",
-    password: "123456",
-  });
+  const { email, password, handleInputChange, formState } = useForm(formLogin);
 
   const isAuthenticating = useMemo(() => status === statusAuth[0], [status]);
 
