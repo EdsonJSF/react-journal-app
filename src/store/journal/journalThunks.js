@@ -35,5 +35,6 @@ export const startLoadingNotes = () => {
     const notes = await loadNotes(uid);
 
     dispatch(setNotes(notes));
+    dispatch(setActiveNote(notes.at(-1)));
   };
 };
