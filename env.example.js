@@ -6,3 +6,5 @@ export const firebaseConfig = {
   messagingSenderId: "",
   appId:             "",
 };
+
+export const cloudUrl = "";

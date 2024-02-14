@@ -9,7 +9,7 @@ import {
   setSaving,
   updateNote,
 } from "./";
-import { loadNotes } from "../../helpers";
+import { fileUpload, loadNotes } from "../../helpers";
 
 export const startNewNote = () => {
   return async (dispatch, getState) => {
@@ -58,5 +58,14 @@ export const startSaveNote = () => {
     await setDoc(docRef, noteToFireStore, { merge: true });
 
     dispatch(updateNote(activeNote));
+  };
+};
+
+export const startUploadFiles = (files = []) => {
+  return async (dispatch) => {
+    dispatch(setSaving());
+
+    const secure_url = await fileUpload(files[0]);
+    console.log({secure_url});
   };
 };
