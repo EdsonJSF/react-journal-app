@@ -22,7 +22,7 @@ export const startNewNote = () => {
       title: "",
       body: "",
       date: new Date().getTime(),
-      imageUrls: []
+      imageUrls: [],
     };
 
     const newDoc = doc(collection(firestoreApp, `${uid}/journal/notes`));
@@ -75,5 +75,6 @@ export const startUploadFiles = (files = []) => {
     const photosUrls = await Promise.all(fileUploadPromises);
 
     dispatch(setPhotoToActiveNote(photosUrls));
+    dispatch(startSaveNote());
   };
 };
