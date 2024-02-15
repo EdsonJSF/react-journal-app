@@ -18,9 +18,9 @@ import {
 } from "../../store/auth";
 
 const registerForm = {
-  displayName: "Example Mailinator",
-  email: "example@mailinator.com",
-  password: "123456",
+  displayName: "",
+  email: "",
+  password: "",
 };
 
 const registerFormValidations = {
