@@ -10,7 +10,7 @@ import {
 import { TurnedInNot } from "@mui/icons-material";
 import { setActiveNote } from "../../store/journal";
 
-export const JournalSideBarListItem = ({ id, title, body, date }) => {
+export const JournalSideBarListItem = ({ id, title = "", body, date, imageUrls = [] }) => {
   const newTitle = useMemo(() => {
     return title.length > 15 ? title.substring(0, 15) + "..." : title;
   }, [title]);
@@ -18,7 +18,7 @@ export const JournalSideBarListItem = ({ id, title, body, date }) => {
   const dispatch = useDispatch();
 
   const handleActiveNote = () => {
-    dispatch(setActiveNote({ id, title, body, date }));
+    dispatch(setActiveNote({ id, title, body, date, imageUrls }));
   };
 
   return (

@@ -6,6 +6,7 @@ import {
   savingNewNote,
   setActiveNote,
   setNotes,
+  setPhotoToActiveNote,
   setSaving,
   updateNote,
 } from "./";
@@ -21,6 +22,7 @@ export const startNewNote = () => {
       title: "",
       body: "",
       date: new Date().getTime(),
+      imageUrls: []
     };
 
     const newDoc = doc(collection(firestoreApp, `${uid}/journal/notes`));
@@ -42,7 +44,7 @@ export const startLoadingNotes = () => {
     const notes = await loadNotes(uid);
 
     dispatch(setNotes(notes));
-    dispatch(setActiveNote(notes.at(-1)));
+    dispatch(setActiveNote(null));
   };
 };
 
@@ -65,7 +67,13 @@ export const startUploadFiles = (files = []) => {
   return async (dispatch) => {
     dispatch(setSaving());
 
-    const secure_url = await fileUpload(files[0]);
-    console.log({secure_url});
+    const fileUploadPromises = [];
+    for (const file of files) {
+      fileUploadPromises.push(fileUpload(file));
+    }
+
+    const photosUrls = await Promise.all(fileUploadPromises);
+
+    dispatch(setPhotoToActiveNote(photosUrls));
   };
 };
