@@ -2,7 +2,8 @@ import { fileUpload } from "../../src/helpers/fileUpload";
 
 describe("Test on fileUpload", () => {
   test("should upload the file to clouddinary", async () => {
-    const imageUrl = "https://dasacounseling.weebly.com/uploads/5/6/1/4/56149545/2263864_orig.jpg";
+    const imageUrl =
+      "https://dasacounseling.weebly.com/uploads/5/6/1/4/56149545/2263864_orig.jpg";
 
     const resp = await fetch(imageUrl);
     const blob = await resp.blob();
@@ -11,5 +12,15 @@ describe("Test on fileUpload", () => {
     const url = await fileUpload(file);
 
     expect(typeof url).toBe("string");
+  });
+
+  test("should return null", async () => {
+    const file = new File([], "image.jpg");
+
+    const url = await fileUpload(file);
+
+    console.log(url);
+
+    expect(url).toBe(null);
   });
 });

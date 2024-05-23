@@ -1,6 +1,7 @@
 import { cloudUrl } from "../../env";
 
 export const fileUpload = async (file) => {
+  if (!file) return null;
   if (!file) throw new Error("File doesn't exist");
 
   const formData = new FormData();
@@ -18,6 +19,7 @@ export const fileUpload = async (file) => {
 
     return respData.secure_url;
   } catch (error) {
-    throw new Error(error.message);
+    return null;
+    // throw new Error(error.message);
   }
 };
