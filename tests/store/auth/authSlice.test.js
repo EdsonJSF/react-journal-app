@@ -1,4 +1,10 @@
-import { authSlice, login, logout } from "../../../src/store/auth/authSlice";
+import {
+  authSlice,
+  checkingCredentials,
+  login,
+  logout,
+  status,
+} from "../../../src/store/auth/authSlice";
 import {
   authenticatedState,
   initialState,
@@ -42,5 +48,11 @@ describe("Test on authSlice", () => {
       ...notAuthenticatedState,
       errorMessage,
     });
+  });
+
+  test(`should change the status`, () => {
+    const state = authSlice.reducer(initialState, checkingCredentials());
+
+    expect(state.status).toBe(status[0]);
   });
 });

@@ -1,7 +1,7 @@
 import { status } from "../../src/store/auth/authSlice";
 
 export const initialState = {
-  status: status[0],
+  status: status[2],
   uid: null,
   email: null,
   displayName: null,
