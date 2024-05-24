@@ -1,5 +1,10 @@
-import { authSlice } from "../../../src/store/auth/authSlice";
-import { initialState } from "../../fixtures/authFixtures";
+import { authSlice, login, logout } from "../../../src/store/auth/authSlice";
+import {
+  authenticatedState,
+  initialState,
+  notAuthenticatedState,
+  testUser,
+} from "../../fixtures/authFixtures";
 
 describe("Test on authSlice", () => {
   test("should return the initial state", () => {
@@ -8,5 +13,34 @@ describe("Test on authSlice", () => {
     const state = authSlice.reducer(initialState, {});
 
     expect(state).toEqual(initialState);
+  });
+
+  test("should do the authentication", () => {
+    const state = authSlice.reducer(initialState, login(testUser));
+
+    expect(state).toEqual(authenticatedState);
+  });
+
+  test("should do the logout without arguments", () => {
+    const state = authSlice.reducer(authenticatedState, logout());
+
+    expect(state).toEqual({
+      ...notAuthenticatedState,
+      errorMessage: undefined,
+    });
+  });
+
+  test("should do the logout with arguments", () => {
+    const errorMessage = "An error";
+
+    const state = authSlice.reducer(
+      authenticatedState,
+      logout({ errorMessage })
+    );
+
+    expect(state).toEqual({
+      ...notAuthenticatedState,
+      errorMessage,
+    });
   });
 });
