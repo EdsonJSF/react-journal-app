@@ -39,7 +39,7 @@ export const LoginPage = () => {
     dispatch(startLoginWithEmailPassword(formState));
   };
 
-  const hancleGoogleSingIn = () => {
+  const handleGoogleSingIn = () => {
     dispatch(startGoogleSingInThunk());
   };
 
@@ -94,7 +94,8 @@ export const LoginPage = () => {
                 type="button"
                 variant="contained"
                 fullWidth
-                onClick={hancleGoogleSingIn}
+                aria-label="google-sing-in-btn"
+                onClick={handleGoogleSingIn}
                 disabled={isAuthenticating}
               >
                 <Google />
